@@ -1,0 +1,11 @@
+package package1;
+import week10.ClassA;
+
+public class ClassC {
+	// 다른 패키지의 퍼블릭인 생성자 호출
+	ClassA c1 = new ClassA(true);
+	//default : 패키지가 달라지면 호출 불가
+	/* ClassA c2 = new ClassA(10); */
+	// 다른패키지 , private 생성자 호출 불가
+	//ClassA c3 = new ClassA("홍길동");
+}
