@@ -1,0 +1,71 @@
+package week10;
+
+public class Airplane {
+	// 부모 클래스
+	
+	public void takeoff() {
+		System.out.println("이륙하다.");
+	}
+	public void fly() {
+		System.out.println("일반비행하다.");
+	}
+	public void land() {
+		System.out.println("착륙하다.");
+	}
+	
+}
+
+
+
+
+package week10;
+
+public class SonicAirplane extends Airplane{
+
+	//비행모드에 따라 비행방법이 달라지는 경우
+	//비행모드 설정
+	public static final int NORMAL = 1;
+	public static final int SUPERSONIC = 2;
+	
+	int flyMode = 1;
+	
+	private int maxspeed;
+	private int soundspeed;
+	@Override
+	public void fly() { // 기존의 fly()메소드를 자식 클래스안에서 새로 정의하고 있다. 
+		if (flyMode == SUPERSONIC)
+			System.out.println("음속비행하다.");
+		else// 부모의 fly메소드를 실행시킨다.
+			super.fly();
+	}
+	
+	public int getMaxspeed() {
+		return maxspeed;
+	}
+	public int getSoundspeed() {
+		return soundspeed;
+	}
+	
+}
+
+
+package week10;
+
+public class AirplaneEx {
+	public static void main(String[] args) {
+		SonicAirplane sPlane = new SonicAirplane();
+		
+		sPlane.takeoff();
+		sPlane.fly();
+		sPlane.land();
+		sPlane.flyMode = 2;
+		sPlane.fly();
+	}
+}
+
+[결과]
+이륙하다.
+일반비행하다.
+착륙하다.
+음속비행하다.
+
