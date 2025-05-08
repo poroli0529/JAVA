@@ -1,0 +1,112 @@
+package week10;
+
+public class Phone {
+	//자식 객체의 공통된 속성과 기능을 뽑아서 클래스로 선언 => 부모클래스 
+	//부모의 private => 상속이 X
+	private String model;
+	private String color;
+	
+	public Phone(String model, String color) {
+		this.model = model;
+		this.color = color;
+		System.out.println("부모객체가 생성되었습니다.");
+	}
+	
+	
+	public String getModel() {
+		return model;
+	}
+
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+
+	public String getColor() {
+		return color;
+	}
+
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+
+	public void bell() {
+		System.out.println("벨이 울립니다.");
+	}
+	public void sendVoice(String msg) {
+		System.out.println("나 : " + msg);
+	}
+	public void receiveVoice(String msg) {
+		System.out.println("너 : "+msg);
+	}
+	public void hangUp() {
+		System.out.println("전화를 끊습니다.");
+	}
+}
+
+
+
+package week10;
+
+public class Smartphone extends Phone {
+	// 추가로 필요한 필드나 메소드 선언 가능
+	private boolean wifi;
+	public Smartphone(String model, String color) {
+//		this.model = model;
+//		this.color = color;
+		// 부모 생성자 호출
+		super(model, color);
+		
+		System.out.println("스마트폰 생성자 호출");
+	}
+	public boolean isWifi() {
+		return wifi;
+	}
+
+	public void setWifi(boolean wifi) {
+		System.out.println("와이파이 모드가 변경되었습니다.");
+		
+	}
+	
+	public void internet() {
+		System.out.println("인터넷 연결");
+	}
+}
+
+
+
+package week10;
+
+public class SmartPhoneEx {
+	
+	public static void main(String[] args) {
+		Smartphone mine = new Smartphone("갤럭시", "white");
+		
+		System.out.println("모델 : " + mine.getModel());
+		System.out.println("색상 : " + mine.getColor());
+		System.out.println("와이파이 : " + mine.isWifi());
+		
+		mine.bell();
+		mine.sendVoice("Hello");
+		mine.receiveVoice("이승종입니다.");
+		mine.hangUp();
+		mine.setWifi(true);
+	}
+}
+
+
+
+[결과]
+부모객체가 생성되었습니다.
+스마트폰 생성자 호출
+모델 : 갤럭시
+색상 : white
+와이파이 : false
+벨이 울립니다.
+나 : Hello
+너 : 이승종입니다.
+전화를 끊습니다.
+와이파이 모드가 변경되었습니다.
