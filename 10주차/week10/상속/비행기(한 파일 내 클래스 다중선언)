@@ -1,0 +1,26 @@
+package week10;
+
+class AirLine {
+	// 부모클래스
+	public void takeoff() {
+		System.out.println("이륙하다.");
+	}
+	public void fly() {
+		System.out.println("일반비행하다.");
+	}
+	public void land() {
+		System.out.println("착륙하다.");
+	}
+}
+public class AirCraft extends AirLine{ // 자식클래스
+	@Override
+	public void fly() {
+		System.out.println("여객기 비행입니다.");
+	}
+	public static void main(String[] args) {
+		AirCraft air = new AirCraft();
+		air.takeoff();
+		air.fly();
+		air.land();
+}
+}
