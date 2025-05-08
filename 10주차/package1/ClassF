@@ -1,0 +1,18 @@
+package package1;
+
+import week10.ClassD;
+
+public class ClassF {
+	public ClassF() {
+		ClassD dd = new ClassD();
+		dd.field1 = 20;
+		//default 는 다른패키지에서 호출이안됨.
+		//dd.field2 = 20;
+		// private 는 다른 패키지에서 호출X 오직 본인 클래스 내에서만 사용.
+		//dd.field3 = 20;
+		
+		dd.method1();
+		//dd.method2();
+		//dd.method3();
+}
+}
