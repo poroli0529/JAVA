@@ -1,0 +1,98 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main".
+public class Parent{
+    string field1;
+    public void method1() {
+        sysout("Parents-method1()");
+        
+    }
+    public void method2() {
+        sysout("Parents-method2()");
+    }
+}
+
+
+
+public class Child extends Parent{
+    string field2;
+    //Parent 클래스의 method2()를 오버라이드
+    public void method2(){
+        sysout("child-method2()");
+    }
+// 메소드 추가 child 클래스에만 정의 
+    public void method3(){
+        sysout("child-method3()")
+    }
+}
+
+public class ChildEx{
+    public static void main(String[] args){
+        Child child = new Child();
+        child.method1();
+// 부모한테서 상속받은 메소드라도 자식클래스에서 재정의되면 재정의된 메소드가 호출됨.
+        child.method2();
+        child.method3();
+    // 클래스의 자동타입 변환
+    // 부모클래스 변수 <= 자식객체를 대입
+        Parent parent = child;
+        parent.method1();  // <<= 이거는 부모의 것
+        parent.method2();  // <<= 이거는 자식의 것  부모클래스 객체가 메소드를 불러도 오버라이드한 자식의 메소드가 호출이 된다.
+        parent.method3();  // <<= 이거는 호출 불가!  부모클래스 객체는 자식클래스 객체의 고유한 메소드는 호출하지 못한다. 
+        
+        
+        parent.field1 = "Aaa";
+    //  parent.field2 = "bbb"; <= 불가능 부모형 객체가 자식의 고유 필드에 접근 금지
+
+    // 강제타입 변환(casting) 다시 자식클래스에만 정의된 필드나 메소드를 접근하려면 강제타입 변환이 필요
+        Child child2 = (Child)parent;
+        child2.field2 = "Bbb";
+        child2.method3();
+
+
+    // 순수 부모객체를 casting 해 보자
+        Parent parent2 = new Parent();
+        Child child3 = (Child)parent
+        
+        
+    }
+}
+
+상속 끝 다형성 
+
+
+public class Tire{
+    private in maxRotation;
+    public void roll(){
+        sysout("타이어회전");
+    }
+}
+
+public class Kumhotire extends Tire{
+    //오버라이드
+    public void roll(){
+        sysout("금호타이어 회전")
+    }
+}
+//필요한 속성(부품) - 필드로 정의
+// 필드가 클래스 변수
+public Tire tire;
+    
+public void run(){
+    tire.roll();
+}
+
+public class CarEx{
+    public static void main(String[] args){
+        Car car = new Car();
+        car.tire = new Tire();
+        car.run();
+
+        car.tire = new HankookTire();
+        car.run();
+        car.tire = new Kumhotire();
+        car.run();
+    }
+}
