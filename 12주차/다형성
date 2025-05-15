@@ -1,0 +1,100 @@
+package wiuwiu;
+
+public abstract class Game {
+
+	private String title;
+	private String version;
+	
+	public Game(String title, String version) {
+		this.title = title;
+		this.version = version;
+	}
+	// 모든 자식 객체에서 필요한 메소드
+	public void start() {
+		System.out.println("제목 : " + title );
+		System.out.println("버전 : " + version );
+		System.out.println(title + "게임을 시작합니다.");
+	}
+	
+	public abstract void GameDesc();
+}
+
+
+
+package wiuwiu;
+
+public class GameEx {
+	
+	public static void main(String[] args) {
+	
+		Game[] game = new Game[3];
+		game[0] = new LOL("롤","19");
+		game[1] = new SuperMario();
+		game[2] = new Testris();
+		
+		for (int i = 0; i < game.length; i++) {
+			game[i].start();
+			game[i].GameDesc();
+			System.out.println("---------");
+		}
+		
+		//향상된 for문 이용
+		for(Game g : game ) {
+			g.start();
+			g.GameDesc();
+			System.out.println("---------");
+		}
+		
+		
+	}
+}
+
+
+
+package wiuwiu;
+
+public class LOL extends Game{
+
+	public LOL(String title, String version) {
+		super(title, version); // 부모클래스의 생성자로 초기화
+		
+	}
+	public void GameDesc() {
+		System.out.println("롤은 뭐 ~ 입니다~ ㅋ");
+	}
+
+	
+}
+
+
+
+package wiuwiu;
+
+public class SuperMario extends Game{
+	
+	public SuperMario() {
+		super("슈퍼마리오","버전1");
+	}
+	public void GameDesc() {
+		System.out.println("슈슈슈슈마리오");
+	}
+	
+}
+
+
+
+
+
+
+package wiuwiu;
+
+public class Testris extends Game{
+
+	public Testris(){
+		super("테트리스", "버전14");
+	}
+	
+	public void GameDesc() {
+		System.out.println("테테ㅔ테테테테텥ㅌㅌㅌㅌ");
+	}
+}
