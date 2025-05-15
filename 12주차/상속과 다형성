@@ -1,0 +1,159 @@
+package wewe2;
+
+public abstract class Animal {
+	//=> 추상클래스 / 객체 생성이 불가 & 상속 가능 
+	public String kind;
+	// 모든 동물에 동일하게 적용
+	public void breathe() {
+		System.out.println("숨을 쉽니다.");
+	}
+	// 모든 동물은 소리를 낸다.
+	// 자식클래스에서 반드시 재정의 해야 함.
+	// 추상메소드 => 실행문이 없음, 메소드 형태만 선언
+	public abstract void sound();
+	
+}
+
+
+package wewe2;
+
+public class AnimalEx {
+	public static void main(String[] args) {
+		// static은 객체를 생성하지않아도 실행할 수 있다.
+		
+		//추상클래스는 객체 생성이 불가능 
+		//대신, 상속은 가능 
+		//Animal animal = new Animal();
+		
+		Dog dog = new Dog();
+		Cat cat = new Cat();
+		dog.sound();
+		cat.sound();
+		System.out.println("------------------");
+		
+		Animal animal = dog; 
+		Animal animal2 = cat;  // 이게 다형성 부모객체에 뭐가 들어가냐에따라 부모객체의 사용하는 것이 달라진다.
+		animal.sound();
+		animal2.sound();
+		
+		System.out.println("------------------");
+		System.out.println("[매개변수의 다양성]");
+		animalSound(new Dog());
+		animalSound(new Cat());
+	}
+	
+	private static void animalSound(Animal animal) {
+		animal.sound();
+		animal.breathe();
+		// animal.dogLife(); <= 자식고유의 것은 부모가 접근이 불가능하다.
+		// 그래도 접근하고 싶다?   <= 강제형변환을 하면 된다. 
+		if(animal instanceof Dog) { System.out.println("Dog 객체로 변환 가능");
+			Dog dog = (Dog)animal;
+			dog.dogLife();
+		} else if (animal instanceof Cat) {
+			System.out.println("Cat 객체로 변환 가능");
+			Cat cat = (Cat)animal;
+			cat.catLife();
+		}
+	}
+}
+
+
+
+package wewe2;
+
+public class Cat extends Animal {
+
+	public Cat() {
+		this.kind = "포유류";
+	}
+	@Override
+	public void sound() {
+		System.out.println("야옹");
+	}
+	public void catLife()
+	{
+		System.out.println("고양이의 수명은 ~입니다.");
+	}
+	
+}
+
+
+package wewe2;
+
+public class Dog extends Animal{
+
+	public Dog() {
+		this.kind = "포유류";
+	}
+	@Override
+	public void sound() {
+		System.out.println("멍멍~");	
+	}
+	
+	public void dogLife() {
+		System.out.println("강아지의 수명~입니다.");
+	}
+	
+	
+}
+
+
+
+
+
+package wewe2;
+
+public class Driver {
+	public void Drive(Vehicle v) {
+		v.run();
+	}
+
+}
+
+
+
+
+
+package wewe2;
+
+public class DriverEx {
+	
+	public static void main(String[] args) {
+		Driver driver = new Driver();
+		Vehicle v = new Vehicle();
+		
+		driver.Drive(v);
+		
+		driver.Drive(new Taxi());
+	}
+}
+
+
+
+
+package wewe2;
+
+public class Taxi extends Vehicle{
+
+	public void run() {
+		System.out.println("택시가 달립니다.");
+	}
+	
+}
+
+
+
+
+
+package wewe2;
+
+public class Vehicle {
+	
+	public void run() {
+		System.out.println("차가 달립니다.");
+	}
+	
+}
+
+
